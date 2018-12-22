@@ -1,6 +1,10 @@
-
+;; Programma scritto in chicken scheme
+;; TODO codificare in codice morse
+;; TODO prendere comandi linea di comando
 (define ordered-alphabet "**ETIANMSURWDKGOHVF?L?PJBXCYZQ??54?3???2??+????16=/?????7???8?90")
 
+;; array di lettere in ordinate per creare
+;; l'albero per la decodifica del codice morse
 (define ordered-alphabet '(#\* #\* #\E #\T #\I #\A #\N #\M #\S #\U #\R #\W #\D #\K #\G #\O #\H #\V #\F #\? #\L #\? #\P #\J #\B #\X #\C #\Y #\Z #\Q #\? #\? #\5 #\4 #\? #\3 #\? #\? #\? #\2 #\? #\? #\+ #\? #\? #\? #\? #\1 #\6 #\= #\/ #\? #\? #\? #\? #\? #\7 #\? #\? #\? #\8 #\? #\9 #\0))
 
 (define list-position)
@@ -31,8 +35,10 @@
 		 "")
 
 		((null? morsecode)
-		 (make-string 1
-					  (list-ref ordered-alphabet (entry albero))))
+		 (make-string
+		   1
+		   (list-ref
+			 ordered-alphabet (entry albero))))
 
 		((char=? (car morsecode) #\.)
 		 (decode-morse
@@ -58,10 +64,10 @@
 			  (cdr morsecode)
 			  albero)))))
 
-(define (decode morse)
+(define (morse-decode morse)
   (define albero (init-albero 1 63))
   (decode-morse-string
 	(string-split morse)
 	albero))
-
-(print (decode ".-- .- . ."))
+;; Example
+;;(print (morse-decode ".- - . ... -"))
